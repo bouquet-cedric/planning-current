@@ -1,0 +1,518 @@
+body {
+  overflow-x: hidden;
+  position: relative;
+  scroll-behavior: smooth;
+}
+
+h1 {
+  text-align: center;
+}
+
+h1.title {
+  font-family: "Metal";
+  font-size: 36pt;
+  margin-top: 0rem;
+  margin-bottom: 1rem;
+  color: white;
+  text-shadow:
+    var(--brown) 3px 3px,
+    var(--brown) -1px 1px,
+    var(--brown) 1px -1px,
+    var(--brown) -1px -1px;
+}
+
+.planning {
+  display: flex;
+  background-color: lightgray;
+  border-radius: 10px;
+  gap: 1rem;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  padding: 1rem;
+}
+
+.month {
+  display: grid;
+  border: 1px solid black;
+  border-radius: 25px;
+  grid-template-columns: repeat(7, 1fr);
+  background: rgb(10, 10, 10, 1);
+  gap: 0.5rem;
+  padding: 0.5rem;
+  position: relative;
+}
+
+.month::before {
+  content: "";
+  top: 0;
+  left: 0;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: rgba(211, 211, 211, 0.4);
+  filter: blur(10px);
+}
+
+._month {
+  display: flex;
+  height: 100%;
+  flex-shrink: 0;
+  flex-direction: column;
+  align-items: center;
+}
+
+.day {
+  display: flex;
+  align-items: center;
+  min-width: 7rem !important;
+  max-height: 5.5rem;
+  border: 1px solid wheat;
+  flex-direction: column;
+  padding: 1rem;
+  border-radius: 25px 25px 10px 25px;
+  background: lightgrey;
+  position: relative;
+}
+
+.alerts {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.25rem;
+  min-width: 1rem;
+  text-align: center;
+  color: blue;
+  font-weight: bold;
+  border-radius: 0 25px 0 10px;
+  background-color: rgb(200, 160, 65);
+  cursor: pointer;
+}
+
+.alerts .activities {
+  display: none;
+}
+
+.alerts:hover .activities {
+  display: flex;
+  color: initial;
+  font-weight: initial;
+  flex-direction: column;
+  gap: 1rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, 0%);
+  background-color: rgba(80, 80, 80, 0.6);
+  z-index: 1000 !important;
+  width: max-content;
+  overflow: auto;
+  max-width: 20vw;
+  padding: 0.4rem;
+  border-radius: 15px;
+  font-family: "JetBrains";
+  font-variant-ligatures: common-ligatures contextual;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.activity {
+  display: flex;
+  flex-direction: column;
+  background: whitesmoke;
+  padding: 0.25rem;
+  border-radius: 5px;
+  > span {
+    padding: 0 0.5rem;
+  }
+}
+
+.month-name {
+  font-family: "Metal";
+  font-size: x-large;
+  text-transform: capitalize;
+  background-color: black;
+  color: white;
+  padding: 0.2rem 0.75rem;
+  margin-bottom: 0.5rem;
+  border-radius: 15px;
+}
+
+.number-day {
+  font-size: x-large;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 30%;
+  padding: 0.2rem;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.fr-day {
+  text-transform: capitalize;
+  font-family: "Metal";
+  font-size: 11pt;
+  margin-top: 0.15rem;
+  padding: 0.2rem 0.75rem;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 5px;
+
+  text-shadow:
+    black 1px 1px,
+    black -1px 1px,
+    black 1px -1px,
+    black -1px -1px;
+}
+
+.statut,
+.statut-full {
+  font-size: 16pt !important;
+}
+
+.statuts {
+  font-size: 16pt !important;
+  margin: 0.5rem 0 0 0;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.day:has(.ferie) {
+  background-color: yellow;
+}
+
+.day:has(.week-end) {
+  background-color: rgba(255, 230, 0, 0.635);
+}
+
+.day:has(.statut.conges, .statut.rtt, .statut.rtt-e) {
+  background-image: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.4) 50%,
+    rgba(209, 81, 209, 0.4) 50% 100%
+  );
+}
+
+.day:has(.statut-full.conges) {
+  background-color: rgba(209, 81, 209, 0.4);
+}
+.day:has(.statut-full.rtt) {
+  background-color: rgba(169, 100, 229, 0.4);
+}
+.day:has(.statut-full.rtt-e) {
+  background-color: rgba(80, 10, 80, 0.4);
+}
+
+.previous-day:not(:has(.ferie, .statut-full.week-end, .statut-full.conges)) {
+  background: rgba(220, 240, 220, 0.9) !important;
+  position: relative;
+}
+
+.previous-day::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  display: flex;
+  border-radius: 25px 25px 10px 25px;
+}
+
+.current-day:not(:has(.ferie)) {
+  position: relative;
+  border-radius: 25px 25px 10px 25px;
+}
+
+.current-day:not(:has(.ferie))::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  border-radius: 25px 25px 10px 25px;
+  background: rgba(255, 110, 110, 0.3);
+}
+
+.buttons {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.count {
+  border-radius: 5px;
+  min-height: 1.5rem;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  position: relative;
+  background-color: wheat;
+  font-family: "Metal";
+  font-size: 18pt;
+  text-shadow:
+    black 1px 1px,
+    black -1px 1px,
+    black 1px -1px,
+    black -1px -1px;
+  color: gold;
+  border: 0px;
+
+  &.valid:hover {
+    background-color: rgba(0, 250, 0, 0.6);
+  }
+  &.reset:hover {
+    background-color: rgba(250, 0, 0, 0.6);
+  }
+  &::before {
+    content: "";
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    height: 100%;
+    display: flex;
+    filter: blur(20px);
+    background-color: rgba(167, 167, 167, 0.5);
+  }
+}
+
+.result {
+  border-radius: 10px;
+  min-height: 1.5rem;
+  font-family: "Metal";
+  font-size: 18pt;
+  background-color: white;
+  border: 1px solid black;
+  padding: 0.25rem 0.5rem;
+  text-shadow:
+    black 1px 1px,
+    black -1px 1px,
+    black 1px -1px,
+    black -1px -1px;
+  color: gold;
+  position: relative;
+}
+
+.gestion {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 1rem;
+  width: 90%;
+}
+
+.result-hover {
+  display: none;
+  text-shadow: none;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  transform: translateY(-1rem);
+  padding: 0.5rem;
+  width: 15vw;
+  align-items: center;
+  background-color: white;
+  border-radius: 10px;
+  max-height: 30vh;
+  overflow: auto;
+  border: 3px dashed lightgray;
+  > span {
+    font-family: "Metal";
+    color: gray;
+    text-transform: capitalize;
+    font-size: 16pt;
+  }
+}
+
+.result:hover .result-hover {
+  display: flex;
+  flex-direction: column;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 1rem;
+  row-gap: 1rem;
+  padding: 0.5rem;
+  width: 95%;
+}
+
+._calendar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.calendar {
+  font-family: "Metal";
+  text-shadow:
+    black 1px 1px,
+    black -1px 1px,
+    black 1px -1px,
+    black -1px -1px;
+  color: white;
+  font-size: 28pt;
+  margin: 0;
+}
+
+.grid > a {
+  margin: auto;
+  padding: 0.25rem 0;
+  background-color: lightskyblue;
+  color: black;
+  font-family: "Metal";
+  font-size: x-large;
+  text-transform: capitalize;
+  width: 100%;
+  min-height: 1.5rem;
+  display: flex;
+  border-radius: 5px;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  position: relative;
+}
+
+.grid > a::before {
+  content: "";
+  width: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  height: 100%;
+  display: flex;
+  filter: blur(20px);
+  background-color: rgba(167, 167, 167, 0.5);
+}
+
+.grid > a.active {
+  background-color: gray;
+}
+
+:target > *:first-child {
+  background: gray;
+  color: black;
+}
+
+div.params {
+  display: flex;
+  flex-direction: column;
+  border-radius: 0 10px 10px 0;
+  align-items: center;
+  justify-content: space-around;
+  background-color: rgba(245, 222, 179, 0.566);
+  width: 30%;
+}
+
+.container {
+  display: flex;
+  align-items: stretch;
+  column-gap: 1rem;
+  padding: 0 0.25rem;
+}
+
+select[multiple] {
+  width: 100%;
+  min-height: 160px;
+  padding: 0.5rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  font-size: 0.95rem;
+  transition:
+    border 0.2s ease,
+    box-shadow 0.2s ease;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+}
+
+select[multiple]:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+select[multiple] option {
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  width: 85%;
+  color: #2573b2;
+  letter-spacing: 0.1rem;
+  text-align: center;
+  font-family: "Metal";
+  font-size: x-large;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+select[multiple] option:not(:last-child) {
+  margin-bottom: 0.2rem;
+}
+
+select[multiple] option:checked,
+select[multiple] option:focus {
+  background-color: #2573b2;
+  color: white;
+}
+
+select[multiple]::-webkit-scrollbar {
+  width: 8px;
+}
+
+select[multiple]::-webkit-scrollbar-thumb {
+  background: #c7c7c7;
+  border-radius: 8px;
+}
+
+select[multiple]::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+.template-user {
+  display: flex;
+  text-transform: capitalize;
+  align-items: center;
+  gap: 1rem;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+#name_user {
+  font-family: "Metal";
+  font-size: 16pt;
+}
+
+#unconnect {
+  padding: 0.5rem;
+  border-radius: 15px;
+  cursor: pointer;
+  background-color: wheat;
+  color: wheat;
+  color: var(--brown);
+  font-family: "Metal";
+  font-size: 14pt;
+  letter-spacing: 0.05rem;
+}
+
+#unconnect:hover {
+  background-color: color-mix(in srgb, var(--brown) 35%, white 60%);
+  color: wheat;
+  text-shadow:
+    black 1px 1px,
+    black -1px 1px,
+    black 1px -1px,
+    black -1px -1px;
+}

@@ -1,0 +1,14 @@
+@font-face {
+  font-family: "JetBrains";
+  src: url("JetBrainsMono-Medium.ttf");
+}
+
+@font-face {
+  font-family: "Metal";
+  src: url("MetalGothic-DemoVersion-Regular.woff2") format("woff");
+}
+
+@font-face {
+  font-family: "Boomster";
+  src: url("BOOMSTER.otf");
+}

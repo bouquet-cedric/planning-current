@@ -1,0 +1,82 @@
+:root {
+  --brown: rgb(69, 38, 38);
+  --gray: rgb(69, 69, 69, 0.7);
+}
+
+#modale {
+  position: fixed;
+  inset: 0;
+  font-family: "Metal";
+  z-index: 20;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  backdrop-filter: blur(8px);
+  align-items: center;
+  justify-content: center;
+  > #modale-box {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background: white;
+    padding: 1rem;
+    border-radius: 10px;
+    > h1 {
+      font-size: 28pt;
+      margin-top: 0;
+      color: wheat;
+      text-shadow:
+        var(--brown) 1px 1px,
+        var(--brown) -1px 1px,
+        var(--brown) 1px -1px,
+        var(--brown) -1px -1px;
+    }
+    > form {
+      display: inline;
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid lightgray;
+      border-radius: 10px;
+      background: repeating-linear-gradient(
+        135deg,
+        #5554 0px,
+        #5554 1px,
+        transparent 1px,
+        transparent 3px
+      );
+
+      > #modale-border-box {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        > span#title {
+          font-size: 22pt;
+          color: lightblue;
+          text-shadow:
+            var(--gray) 1px 1px,
+            var(--gray) -1px 1px,
+            var(--gray) 1px -1px,
+            var(--gray) -1px -1px;
+        }
+        > input {
+          width: 80%;
+          min-height: 18pt;
+        }
+        > button.modale-box-confirm {
+          font-size: 14pt;
+          font-family: "Metal";
+          color: green;
+          width: fit-content;
+          border-radius: 10px;
+          padding: 0.15rem 0.5rem;
+          border: 2px ridge;
+          background-color: whitesmoke;
+          cursor: pointer;
+          &:hover {
+              background-color: wheat;
+            color: lime;
+          }
+        }
+      }
+    }
+  }
+}
